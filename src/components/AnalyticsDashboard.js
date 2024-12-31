@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
-import axios from 'axios';
+import axiosInstance from '../utils/axios';
 
 const StatCard = ({ title, value, prefix = '' }) => (
   <div className="bg-white rounded-lg shadow p-6">
@@ -33,8 +33,8 @@ const AnalyticsDashboard = () => {
       try {
         setLoading(true);
         const [statsRes, analyticsRes] = await Promise.all([
-          axios.get('/api/analytics/dashboard-stats'),
-          axios.get('/api/analytics')
+          axiosInstance.get('/api/analytics/dashboard-stats'),
+          axiosInstance.get('/api/analytics')
         ]);
         
         // Format dates for charts

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-import axios from 'axios';
+import axiosInstance from '../utils/axios';
 
 const MetricCard = ({ title, value, change, prefix = '' }) => (
   <div className="bg-white rounded-lg shadow p-6">
@@ -22,7 +22,7 @@ const Analytics = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/analytics');
+        const response = await axiosInstance.get('/api/analytics');
         const formattedData = response.data.map(item => ({
           ...item,
           date: new Date(item.date).toLocaleDateString(),
